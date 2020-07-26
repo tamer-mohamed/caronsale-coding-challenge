@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../../shared/services/auth/auth.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: "app-login",
@@ -7,26 +9,54 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./login.component.less"],
 })
 export class LoginComponent implements OnInit {
-  validateForm: FormGroup;
-  submitted = false;
+  loginForm: FormGroup;
+  error?: string;
+  submitting = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.validateForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       username: [null, Validators.required],
       password: [null, Validators.required],
     });
   }
 
   submitForm() {
-    this.submitted = true;
+    this.error = null;
+    this.submitting = true;
+
+    for (const i in this.loginForm.controls) {
+      this.loginForm.controls[i].markAsDirty();
+      this.loginForm.controls[i].updateValueAndValidity();
+    }
+
+    this.authService
+      .validateUser(
+        this.loginForm.value.username,
+        this.loginForm.value.password
+      )
+      .subscribe(
+        (res) => {
+          this.submitting = false;
+
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          this.error = error;
+          this.submitting = false;
+        }
+      );
 
     // stop here if form is invalid
-    if (this.validateForm.invalid) {
+    if (this.loginForm.invalid) {
       return;
     }
 
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.validateForm.value));
+    // alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.validateForm.value));
   }
 }

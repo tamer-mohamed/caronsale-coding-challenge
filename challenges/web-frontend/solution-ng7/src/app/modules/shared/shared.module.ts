@@ -1,12 +1,14 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { LoginComponent } from "../login/login.component";
 import {
+  NzAlertModule,
   NzButtonModule,
-  NzFormModule, NzGridModule,
-  NzInputModule, NzLayoutModule,
+  NzFormModule,
+  NzGridModule,
+  NzInputModule,
+  NzLayoutModule,
   NzToolTipModule,
-} from 'ng-zorro-antd';
+} from "ng-zorro-antd";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 const nzModules = [
@@ -15,11 +17,11 @@ const nzModules = [
   NzInputModule,
   NzToolTipModule,
   NzLayoutModule,
-  NzGridModule
+  NzGridModule,
+  NzAlertModule,
 ];
 
 @NgModule({
-  declarations: [LoginComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, ...nzModules],
   exports: [...nzModules, FormsModule, ReactiveFormsModule],
 })

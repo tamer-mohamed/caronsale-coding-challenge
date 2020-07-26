@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  authHashCycles: 5,
+  baseUrl: "https://caronsale-backend-service-dev.herokuapp.com/api/v1",
 };
 
 /*

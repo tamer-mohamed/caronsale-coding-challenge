@@ -6,39 +6,39 @@
       </div>
     </div>
 
+    <nz-alert *ngIf="!!error" nzType="error" [nzMessage]="error"></nz-alert>
+
     <div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
       <div nz-col [nzLg]="10" [nzMd]="18" [nzSm]="24">
         <form
-          [formGroup]="validateForm"
+          [formGroup]="loginForm"
           class="login-form"
           (ngSubmit)="submitForm()"
         >
           <nz-form-item>
             <nz-form-control nzErrorTip="Please input your username!">
-              <nz-input-group nzPrefixIcon="user">
-                <input
-                  type="text"
-                  nz-input
-                  formControlName="username"
-                  placeholder="Username"
-                />
-              </nz-input-group>
+              <input
+                class="username"
+                type="text"
+                nz-input
+                formControlName="username"
+                placeholder="Username"
+              />
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
             <nz-form-control nzErrorTip="Please input your Password!">
-              <nz-input-group nzPrefixIcon="lock">
-                <input
-                  type="password"
-                  nz-input
-                  formControlName="password"
-                  placeholder="Password"
-                />
-              </nz-input-group>
+              <input
+                type="password"
+                nz-input
+                formControlName="password"
+                placeholder="Password"
+              />
             </nz-form-control>
           </nz-form-item>
           <button
             nz-button
+            [nzLoading]="submitting"
             class="login-form-button login-form-margin"
             [nzType]="'primary'"
           >
