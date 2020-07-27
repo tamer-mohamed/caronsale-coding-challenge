@@ -29,7 +29,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 - Handle `401` error response to redirect the user to login page when token is expired
 - Apply linting rules with perttier 
 - Favor absolute imports over relative imports (i.e `shared/services`)
-- Increase the test coverage to 100%  
+- Increase the test coverage to 100%  and add E2E tests.
+- Create css utils via less mixins to apply (i.e spacings, typography ... etc) 
 
 >> The app Folder structure is very simple at the moment, we may need another structure, based on the app size and context.
 
