@@ -45,7 +45,7 @@ describe("LoginComponents", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should add ng-invalid to the required fields", () => {
+  it("should have the form invalid on first load", () => {
     expect(component.loginForm.valid).toBeFalsy();
   });
 

@@ -1,3 +1,73 @@
-<p>
-  overview works!
-</p>
+<nz-layout>
+  <nz-content>
+    <h2>My Auctions</h2>
+
+    <div nz-row [nzGutter]="8">
+      <div
+        *ngFor="let item of auctions"
+        nz-col
+        [nzLg]="4"
+        [nzMd]="6"
+        [nzSm]="24"
+      >
+        <nz-card nzHoverable [nzCover]="coverTemplate">
+          <nz-card-meta
+            [nzTitle]="cardTitle"
+            [nzDescription]="cardDescription"
+          ></nz-card-meta>
+        </nz-card>
+
+        <ng-template #cardTitle>
+          <div nz-row>
+            <div nz-col>
+              <h6>EZ: {{ item.details?.associatedVehicle.ez }}</h6>
+            </div>
+            <div nz-col>
+              <h6>
+                Mileage:
+                {{
+                  item.details?.associatedVehicle.mileageInKm | number
+                }}
+                Km
+              </h6>
+            </div>
+            <div nz-col>
+              <h6>Fuel: {{ item.details?.associatedVehicle.fuelType }}</h6>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template #cardDescription>
+          <div>
+            <h5>
+              Remaining time:
+              {{ item.remainingTimeInSeconds | date: "HH'h':MM'm':SS's'" }}
+            </h5>
+          </div>
+          <div>
+            <h5>
+              Highest bid: {{ item.currentHighestBidValue / 100 | number }}€
+            </h5>
+          </div>
+        </ng-template>
+
+        <ng-template #coverTemplate>
+          <nz-tag *ngIf="item.amIHighestBidder" [nzColor]="'#f50'"
+            >Highest bidder</nz-tag
+          >
+
+          <nz-carousel>
+            <div
+              nz-carousel-content
+              *ngFor="
+                let image of item.details?.associatedVehicle.vehicleImages
+              "
+            >
+              <img style="width: 100%;" [alt]="'vehicle'" [src]="image.url" />
+            </div>
+          </nz-carousel>
+        </ng-template>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>

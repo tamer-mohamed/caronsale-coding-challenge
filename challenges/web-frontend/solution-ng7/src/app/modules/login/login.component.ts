@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../shared/services/auth/auth.service";
-import {Router} from '@angular/router';
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -43,12 +43,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (res) => {
           this.submitting = false;
-
-          this.router.navigate(['/']);
+          this.router.navigate(["/"]);
         },
         (error) => {
-          this.error = error;
           this.submitting = false;
+          this.error = error;
         }
       );
 

@@ -3,12 +3,14 @@ import { CommonModule } from "@angular/common";
 import {
   NzAlertModule,
   NzButtonModule,
+  NzCardModule, NzCarouselModule,
   NzFormModule,
   NzGridModule,
   NzInputModule,
   NzLayoutModule,
+  NzTagModule,
   NzToolTipModule,
-} from "ng-zorro-antd";
+} from 'ng-zorro-antd';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 const nzModules = [
@@ -19,6 +21,9 @@ const nzModules = [
   NzLayoutModule,
   NzGridModule,
   NzAlertModule,
+  NzCardModule,
+  NzTagModule,
+  NzCarouselModule
 ];
 
 @NgModule({

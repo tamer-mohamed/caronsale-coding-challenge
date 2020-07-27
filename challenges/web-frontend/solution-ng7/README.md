@@ -1,6 +1,6 @@
-# Angular7
+# CarOnSale with angular@7
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
+The project is built with Angular@7 and ng-zorro@7.5 (Ant-design with Angular)
 
 ## Development server
 
@@ -22,6 +22,15 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+## Next steps / possible improvements
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Fix marked TODOS
+- Define `api-request` service as a thin layer for API calls for i.e global error handling, request intercepts
+- Handle `401` error response to redirect the user to login page when token is expired
+- Apply linting rules with perttier 
+- Favor absolute imports over relative imports (i.e `shared/services`)
+- Increase the test coverage to 100%  
+
+>> The app Folder structure is very simple at the moment, we may need another structure, based on the app size and context.
+
+

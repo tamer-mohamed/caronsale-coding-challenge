@@ -5,42 +5,53 @@ import * as sha512 from "js-sha512";
 import { catchError, tap } from "rxjs/operators";
 import { environment } from "../../../../environments/environment";
 
+export interface AuthResponse {
+  token: string;
+  userId: string;
+}
+
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  validateUser(
-    username: string,
-    password: string
-  ): Observable<{ token: string }> {
+  validateUser(username: string, password: string): Observable<AuthResponse> {
     const hashedPassword = this._hashPasswordWithCycles(
       password,
       environment.authHashCycles
     );
 
     return this.http
-      .put<{ token: string }>(`authentication/${username}`, {
+      .put<AuthResponse>(`authentication/${username}`, {
         password: hashedPassword,
       })
       .pipe(
-        tap((res) => this.saveToken(res.token)),
+        tap((res) => this.saveUserInfo(res.userId, res.token)),
         catchError(this.handleError)
       );
   }
 
-  saveToken(token: string) {
+  saveUserInfo(userId: string, token: string) {
+    localStorage.setItem("userId", userId);
     localStorage.setItem("token", token);
   }
 
+  getToken() {
+    return localStorage.getItem("token");
+  }
+
+  getCurrentUserId() {
+    return localStorage.getItem("userId");
+  }
+
   isAuthenticated(): boolean {
-    const token = localStorage.getItem("token");
+    const token = this.getToken();
 
     return !!token;
   }
 
-   _hashPasswordWithCycles(password: string, cycles: number): string {
+  _hashPasswordWithCycles(password: string, cycles: number): string {
     let hash = `${password}`;
 
     for (let i = 0; i < cycles; i++) {
@@ -63,6 +74,8 @@ export class AuthService {
       );
     }
 
-    return throwError(error.error.message);
+    return throwError(
+      error.error ? error.error.message : "Something went wrong"
+    );
   }
 }
