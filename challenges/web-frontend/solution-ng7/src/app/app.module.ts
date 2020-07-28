@@ -10,7 +10,7 @@ import { en_US } from "ng-zorro-antd/i18n";
 import { registerLocaleData } from "@angular/common";
 import en from "@angular/common/locales/en";
 import { SharedModule } from "./modules/shared/shared.module";
-import { NetworkInterceptor } from "./network.interceptor";
+import { NetworkInterceptor } from "./shared/network-interceptor/network.interceptor";
 import { OverviewComponent } from './modules/overview/overview.component';
 import {LoginModule} from './modules/login/login.module';
 

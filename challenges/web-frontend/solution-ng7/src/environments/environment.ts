@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   authHashCycles: 5,
-  baseUrl: "https://caronsale-backend-service-dev.herokuapp.com/api/v1",
+  baseUrl: "//caronsale-backend-service-dev.herokuapp.com/api/v1",
 };
 
 /*
